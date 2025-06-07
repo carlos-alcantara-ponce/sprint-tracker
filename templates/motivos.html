@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Motivos de cambios en tareas</h2>
+<form method="post">
+    <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Estado</th>
+                <th>Motivo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in comparaciones %}
+            <tr>
+                <td>{{ c.codigo }}</td>
+                <td>{{ c.estado }}</td>
+                <td>
+                    {% if c.estado != 'En proceso' %}
+                        <input type="text" name="motivo_{{ c.codigo }}" required>
+                    {% else %}
+                        <input type="text" name="motivo_{{ c.codigo }}" value="" readonly>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="submit">Guardar motivos y ver reporte</button>
+</form>
+{% endblock %} 

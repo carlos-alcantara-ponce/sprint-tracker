@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Lista planificada del sprint</h2>
+<form method="post">
+    <table id="tabla-tareas">
+        <thead>
+            <tr>
+                <th>Fecha de inicio</th>
+                <th>Módulo</th>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="date" name="fecha_inicio"></td>
+                <td><input type="text" name="modulo"></td>
+                <td><input type="text" name="codigo"></td>
+                <td><input type="text" name="nombre"></td>
+                <td><button type="button" onclick="agregarFila()">+</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="submit">Guardar lista planificada</button>
+</form>
+<script>
+function agregarFila() {
+    let tabla = document.getElementById('tabla-tareas').getElementsByTagName('tbody')[0];
+    let fila = tabla.rows[0].cloneNode(true);
+    for (let input of fila.querySelectorAll('input')) input.value = '';
+    tabla.appendChild(fila);
+}
+// Cambiar los names para que sean listas
+function prepararEnvio() {
+    let filas = document.querySelectorAll('#tabla-tareas tbody tr');
+    filas.forEach(fila => {
+        fila.querySelectorAll('input')[0].setAttribute('name', 'fecha_inicio');
+        fila.querySelectorAll('input')[1].setAttribute('name', 'modulo');
+        fila.querySelectorAll('input')[2].setAttribute('name', 'codigo');
+        fila.querySelectorAll('input')[3].setAttribute('name', 'nombre');
+    });
+}
+document.querySelector('form').onsubmit = function() {
+    let filas = document.querySelectorAll('#tabla-tareas tbody tr');
+    filas.forEach(fila => {
+        fila.querySelectorAll('input')[0].setAttribute('name', 'fecha_inicio');
+        fila.querySelectorAll('input')[1].setAttribute('name', 'modulo');
+        fila.querySelectorAll('input')[2].setAttribute('name', 'codigo');
+        fila.querySelectorAll('input')[3].setAttribute('name', 'nombre');
+    });
+};
+</script>
+{% endblock %} 

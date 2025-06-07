@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Reporte del Sprint</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Fecha de inicio</th>
+            <th>Módulo (planificado)</th>
+            <th>Código (planificado)</th>
+            <th>Nombre (planificado)</th>
+            <th>Fecha de reporte</th>
+            <th>Módulo (estado)</th>
+            <th>Código (estado)</th>
+            <th>Nombre (estado)</th>
+            <th>% Avance</th>
+            <th>Estado</th>
+            <th>Motivo</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in comparaciones %}
+        <tr>
+            <td>{{ c.fecha_inicio }}</td>
+            <td>{{ c.modulo_plan }}</td>
+            <td>{{ c.codigo }}</td>
+            <td>{{ c.nombre_plan }}</td>
+            <td>{{ c.fecha_reporte }}</td>
+            <td>{{ c.modulo_estado }}</td>
+            <td>{{ c.codigo }}</td>
+            <td>{{ c.nombre_estado }}</td>
+            <td>{{ c.avance }}</td>
+            <td>{{ c.estado }}</td>
+            <td>{{ c.motivo }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="/">Volver al inicio</a>
+{% endblock %} 

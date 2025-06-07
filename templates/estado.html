@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Estado del sprint a la fecha (día X)</h2>
+<form method="post">
+    <table id="tabla-estado">
+        <thead>
+            <tr>
+                <th>Fecha de reporte</th>
+                <th>Módulo</th>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>% Avance</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="date" name="fecha_reporte"></td>
+                <td><input type="text" name="modulo"></td>
+                <td><input type="text" name="codigo"></td>
+                <td><input type="text" name="nombre"></td>
+                <td><input type="number" name="avance" min="0" max="100"></td>
+                <td><button type="button" onclick="agregarFila()">+</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="submit">Guardar estado</button>
+</form>
+<script>
+function agregarFila() {
+    let tabla = document.getElementById('tabla-estado').getElementsByTagName('tbody')[0];
+    let fila = tabla.rows[0].cloneNode(true);
+    for (let input of fila.querySelectorAll('input')) input.value = '';
+    tabla.appendChild(fila);
+}
+document.querySelector('form').onsubmit = function() {
+    let filas = document.querySelectorAll('#tabla-estado tbody tr');
+    filas.forEach(fila => {
+        fila.querySelectorAll('input')[0].setAttribute('name', 'fecha_reporte');
+        fila.querySelectorAll('input')[1].setAttribute('name', 'modulo');
+        fila.querySelectorAll('input')[2].setAttribute('name', 'codigo');
+        fila.querySelectorAll('input')[3].setAttribute('name', 'nombre');
+        fila.querySelectorAll('input')[4].setAttribute('name', 'avance');
+    });
+};
+</script>
+{% endblock %} 
